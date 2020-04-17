@@ -1,7 +1,7 @@
 # Table of Contents
 1. [Dependencies](README.md#dependencies)
-* [Run](README.md#run)
-* [Setting up geckodriver on macOS Catalina](README.md#setting-up-geckodriver-on-macos-catalina)
+2. [Run](README.md#run)
+3. [Setting up geckodriver on macOS Catalina](README.md#setting-up-geckodriver-on-macos-catalina)
 
 # Dependencies
 

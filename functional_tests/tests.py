@@ -27,7 +27,7 @@ class NewVisitorTest(LiveServerTestCase):
                     raise e
                 time.sleep(0.5)
 
-    def test_can_start_a_list_and_retrieve_it_later(self):
+    def test_can_start_a_list_for_one_user(self):
         # User visits an online to-do app
         self.browser.get(self.live_server_url)
 
@@ -61,10 +61,47 @@ class NewVisitorTest(LiveServerTestCase):
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
         self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
 
-        # The site has generated a unique URL to access the to-do list
-        self.fail('Finish the test!')
-
-        # User visits that URL and confirms the list
-
         # User is done with the site
 
+    def test_multiple_users_can_start_lists_at_different_urls(self):
+        # User 1 starts a new to-do list
+        self.browser.get(self.live_server_url)
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Buy peacock feathers')
+        inputbox.send_keys(Keys.ENTER)
+        self.wait_for_row_in_list_table('1: Buy peacock feathers')
+
+        # The site has generated a unique URL for user 1
+        user_1_list_url = self.browser.current_url
+        self.assertRegex(user_1_list_url, '/lists/.+')
+
+        # User 2 comes to the site
+
+        ## We use a new browser session to make sure that other user's
+        ## info is protected
+        self.browser.quit()
+        self.browser = webdriver.Firefox()
+
+        # User 2 visits the home page. User 1's list is not shown
+        self.browser.get(self.live_server_url)
+        page_text = self.browser.find_element_by_tag_name('body').text
+        self.assertNotIn('Buy peacock feathers', page_text)
+        self.assertNotIn('make a fly', page_text)
+
+        # User 2 starts a new list by entering a new item
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Buy milk')
+        inputbox.send_keys(Keys.ENTER)
+        self.wait_for_row_in_list_table('1: Buy milk')
+
+        # User 2 gets a unique URL
+        user_2_list_url = self.browser.current_url
+        self.assertRegex(user_2_list_url, '/lists/.+')
+        self.assertNoEqual(user_2_list_url, user_1_list_url)
+
+        # User 1's list is not shown
+        page_text = self.browser.find_element_by_tag_name('body').text
+        self.assertNotIn('Buy peacock feathers', page_text)
+        self.assertIn('Buy milk', page_text)
+
+        # Both users are done with the site

@@ -97,7 +97,7 @@ class NewVisitorTest(LiveServerTestCase):
         # User 2 gets a unique URL
         user_2_list_url = self.browser.current_url
         self.assertRegex(user_2_list_url, '/lists/.+')
-        self.assertNoEqual(user_2_list_url, user_1_list_url)
+        self.assertNotEqual(user_2_list_url, user_1_list_url)
 
         # User 1's list is not shown
         page_text = self.browser.find_element_by_tag_name('body').text

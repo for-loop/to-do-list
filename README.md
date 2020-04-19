@@ -18,24 +18,18 @@ Coded in Python 3.6.x
 
 ### Functional test
 
-1. Start up the server:
+1. Run the tests:
 
     ```bash
-    $ python manage.py runserver
+    $ python manage.py test functional_tests
     ```
 
-
-2. Run the tests from another shell:
-
-    ```bash
-    $ python functional_tests.py
-    ```
 ### Unit test
 
 1. Run the test
 
     ```bash
-    $ python manage.py test
+    $ python manage.py test lists
     ```
 
 # Setting up geckodriver on macOS Catalina

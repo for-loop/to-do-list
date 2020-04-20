@@ -9,6 +9,7 @@
 * geckodriver (used 0.26.0*)
 * Django 1.11.x
 * Selenium 3.x
+* [Bootstrap](https://getbootstrap.com/) 4.4.x
 
 Coded in Python 3.6.x
 
@@ -16,12 +17,24 @@ Coded in Python 3.6.x
 
 # Run
 
+### Dev server
+
+1. Run the server
+
+    ```bash
+    python manage.py runserver
+    ```
+
+2. Visit `http://localhost:8000`
+
+3. To quit server, `CONTROL-C`
+
 ### Functional test
 
 1. Run the tests:
 
     ```bash
-    $ python manage.py test functional_tests
+    python manage.py test functional_tests
     ```
 
 ### Unit test
@@ -29,7 +42,7 @@ Coded in Python 3.6.x
 1. Run the test
 
     ```bash
-    $ python manage.py test lists
+    python manage.py test lists
     ```
 
 # Setting up geckodriver on macOS Catalina
@@ -39,28 +52,28 @@ This instruction is for users of geckodriver 0.26.0 on macOS 10.15 Catalina, whi
 1. Download the binary:
 
     ```bash
-    $ cd /tmp
-    $ curl -O -L https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-macos.tar.gz
+    cd /tmp
+    curl -O -L https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-macos.tar.gz
     ```
 
 
 2. Uncompress and unpack:
 
     ```bash
-    $ tar -xvzf geckodriver-v0.26.0-macos.tar.gz
+    tar -xvzf geckodriver-v0.26.0-macos.tar.gz
     ```
 
 
 3. Move geckodriver to `/usr/local/bin` (requires `sudo`)
 
     ```bash
-    $ sudo mv ./geckodriver /usr/local/bin/.
+    sudo mv ./geckodriver /usr/local/bin/
     ```
 
 4. Clean up (optional)
 
     ```bash
-    $ rm geckodriver-v0.26.0-macos.tar.gz
+    rm geckodriver-v0.26.0-macos.tar.gz
     ```
 
 ---

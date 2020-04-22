@@ -11,6 +11,7 @@
 * Selenium 3.x
 * [Bootstrap](https://getbootstrap.com/) 4.4.x
 * nginx
+* gunicorn 20.0.x
 
 Coded in Python 3.6.x
 
@@ -37,7 +38,8 @@ Coded in Python 3.6.x
 3. Run the server
 
     ```bash
-    ./virtualenv/bin/python manage.py runserver 8000
+    sudo systemctl start nginx
+    ./virtualenv/bin/gunicorn --bind unix:/tmp/<staging server domain>.socket superlists.wsgi:application
     ```
 
 ### Functional test

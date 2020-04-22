@@ -17,7 +17,7 @@ Coded in Python 3.6.x
 
 # Run
 
-### Dev server
+### Local dev server
 
 1. Run the server
 
@@ -29,12 +29,28 @@ Coded in Python 3.6.x
 
 3. To quit server, `CONTROL-C`
 
+### Staging server
+
+1. SSH onto a VM
+2. cd into project directory
+3. Run the server
+
+    ```bash
+    ./virtualenv/bin/python manage.py runserver 0.0.0.0:8000
+    ```
+
 ### Functional test
 
-1. Run the tests:
+* Run the tests locally:
 
     ```bash
     python manage.py test functional_tests
+    ```
+
+* Run the tests on staging server:
+
+    ```bash
+    STAGING_SERVER=<staging server domain>:8000 ./manage.py test functional_tests
     ```
 
 ### Unit test

@@ -35,11 +35,11 @@ Coded in Python 3.6.x
 
 1. SSH onto a VM
 2. cd into project directory
-3. Run the server
+3. Run the server (Gunicorn config in Systemd)
 
     ```bash
     sudo systemctl start nginx
-    ./virtualenv/bin/gunicorn --bind unix:/tmp/<staging server domain>.socket superlists.wsgi:application
+    sudo systemctl start gunicorn-<staging server domain>
     ```
 
 ### Functional test

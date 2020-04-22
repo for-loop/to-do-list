@@ -10,6 +10,7 @@
 * Django 1.11.x
 * Selenium 3.x
 * [Bootstrap](https://getbootstrap.com/) 4.4.x
+* nginx
 
 Coded in Python 3.6.x
 
@@ -36,7 +37,7 @@ Coded in Python 3.6.x
 3. Run the server
 
     ```bash
-    ./virtualenv/bin/python manage.py runserver 0.0.0.0:8000
+    ./virtualenv/bin/python manage.py runserver 8000
     ```
 
 ### Functional test
@@ -47,11 +48,13 @@ Coded in Python 3.6.x
     python manage.py test functional_tests
     ```
 
-* Run the tests on staging server:
+* Run the tests against staging server:
 
     ```bash
-    STAGING_SERVER=<staging server domain>:8000 ./manage.py test functional_tests
+    STAGING_SERVER=<staging server domain> ./manage.py test functional_tests
     ```
+
+    * optional: add `--failfast`
 
 ### Unit test
 

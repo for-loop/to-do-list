@@ -6,7 +6,7 @@
 # Dependencies
 
 * Firefox (used 75.0+)
-* geckodriver (used 0.26.0*)
+* geckodriver (used 0.26.0)
 * Django 1.11.x
 * Selenium 3.x
 * [Bootstrap](https://getbootstrap.com/) 4.4.x
@@ -15,7 +15,7 @@
 
 Coded in Python 3.6.x
 
-*If setting up geckodriver 0.26.0 on macOS 10.15 (Catalina), [here is a step-by-step instruction](README.md#setting-up-geckodriver-on-macos-catalina)
+> If setting up geckodriver 0.26.0 on macOS 10.15 (Catalina), [here is a step-by-step instruction](README.md#setting-up-geckodriver-on-macos-catalina)
 
 # Run
 
@@ -33,9 +33,11 @@ Coded in Python 3.6.x
 
 ### Staging server
 
+> [See provisioning notes](deploy_tools/provisioning_notes.md)
+
 1. SSH onto a VM
 2. cd into project directory
-3. Run the server (Gunicorn config in Systemd)
+3. Run the server (Gunicorn config in Systemd service)
 
     ```bash
     sudo systemctl start nginx

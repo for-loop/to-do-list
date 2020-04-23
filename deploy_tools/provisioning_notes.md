@@ -18,18 +18,19 @@ sudo apt install nginx git python36 python3.6-venv
 
 ## Nginx Virtual Host config
 
-* See nginx.template.conf
-* Replace DOMAIN with, *e.g.*, staging.my-domain.com
+* See [nginx.template.conf](nginx.template.conf)
+* Replace `DOMAIN` with, *e.g.*, `staging.my-domain.com`
 
 ## Systemd service
 
-* See gunicorn-systemd.template.service
-* Replace DOMAIN with, *e.g.*, staging.my-domain.com
+* See [gunicorn-systemd.template.service](gunicorn-systemd.template.service)
+* Replace `DOMAIN` with, *e.g.*, `staging.my-domain.com`
 
 ## Folder structure
 
 Assume we have a user account at /home/username
 
+```
 /home/username
 └── sites
     ├── DOMAIN1
@@ -42,3 +43,4 @@ Assume we have a user account at /home/username
          ├── .env
          ├── db.sqlite3
          ├── etc
+```

@@ -10,12 +10,13 @@
 * Django 1.11.x
 * Selenium 3.x
 * [Bootstrap](https://getbootstrap.com/) 4.4.x
-* nginx
-* gunicorn 20.0.x
+* Nginx 1.14.0
+* Gunicorn 20.0.x
+* Fabric3 1.14.post1
 
 Coded in Python 3.6.x
 
-> If setting up geckodriver 0.26.0 on macOS 10.15 (Catalina), [here is a step-by-step instruction](README.md#setting-up-geckodriver-on-macos-catalina)
+> If setting up geckodriver 0.26.0 on macOS 10.15 (Catalina), [here is a step-by-step instruction](README.md#setting-up-geckodriver-on-macos-catalina).
 
 # Run
 
@@ -66,6 +67,58 @@ Coded in Python 3.6.x
 
     ```bash
     python manage.py test lists
+    ```
+
+### Deployment with Fabric
+
+> If the server runs on Amazon EC2, you'll need a path to the SSH key.
+
+1. Run fabfile.py (from a local shell)
+
+    ```bash
+    cd deploy_tools/
+    fab deploy:host=<username>@<server domain> [-i /path/to/key.pem]
+    ```
+
+2. Provision Nginx and Gunicorn (on the server)
+
+    Configure Nginx from template:
+
+    ```bash
+    cat ./deploy_tools/nginx.template.conf \
+    | sed "s/DOMAIN/<server domain>/g" \
+    | sudo tee /etc/nginx/sites-available/<server domain>
+    ```
+
+    Activate file with a symlink:
+
+    ```bash
+    sudo ln -s /etc/nginx/sites-available/<server domain> /etc/nginx/sites-enabled/<server domain>
+    ```
+
+    > If deploying for the first time: (skip thereafter)
+    >
+    > ```bash
+    > sudo rm /etc/nginx/sites-enabled/default
+    > ```
+
+    Configure Systemd from template:
+    
+    ```bash
+    cat ./deploy_tools/gunicorn-systemd.template.service \
+    | sed "s/DOMAIN/<server domain>/g" \
+    | sudo tee /etc/systemd/system/gunicorn-<server domain>.service
+    ```
+
+    Start both services:
+
+    > If deploying for the first time, replace `... reload nginx` with `... start nginx`
+
+    ```bash
+    sudo systemctl daemon-reload
+    sudo systemctl reload nginx
+    sudo systemctl enable gunicorn-<server domain>
+    sudo systemctl start gunicorn-<server domain>
     ```
 
 # Setting up geckodriver on macOS Catalina

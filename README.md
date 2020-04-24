@@ -1,7 +1,8 @@
 # Table of Contents
 1. [Dependencies](README.md#dependencies)
 2. [Run](README.md#run)
-3. [Setting up geckodriver on macOS Catalina](README.md#setting-up-geckodriver-on-macos-catalina)
+3. [Deploy](README.md#deploy)
+4. [Setting up geckodriver on macOS Catalina](README.md#setting-up-geckodriver-on-macos-catalina)
 
 # Dependencies
 
@@ -69,11 +70,11 @@ Coded in Python 3.6.x
     python manage.py test lists
     ```
 
-### Deployment with Fabric
-
-> If the server runs on Amazon EC2, you'll need a path to the SSH key.
+# Deploy
 
 1. Run fabfile.py (from a local shell)
+
+    > If the server runs on Amazon EC2, add a path to the SSH key.
 
     ```bash
     cd deploy_tools/

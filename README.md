@@ -48,13 +48,19 @@ Coded in Python 3.6.x
 
 ### Functional test
 
-* Run the tests locally:
+* Run all the tests locally:
 
     ```bash
     python manage.py test functional_tests
     ```
 
-* Run the tests against staging server:
+    > Run a specific test case, *e.g.*,
+    > 
+    > ```bash
+    > python manage.py test functional_tests.test_list_item_validation
+    > ```
+
+* Run all the tests against staging server:
 
     ```bash
     STAGING_SERVER=<staging server domain> ./manage.py test functional_tests

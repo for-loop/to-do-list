@@ -8,7 +8,7 @@ class ItemValidationTest(FunctionalTest):
         # an empty list item. User hists Enter key
         self.browser.get(self.live_server_url)
 
-        self.browser.find_element_by_id('id_new_item').send_keys(Keys.ENTER)
+        self.get_item_input_box().send_keys(Keys.ENTER)
 
         # The home page refreshes with an error message
         self.wait_for(lambda: self.assertEqual(
@@ -17,13 +17,13 @@ class ItemValidationTest(FunctionalTest):
         ))
 
         # User enters some text and tries again. Now it works
-        self.browser.find_element_by_id('id_new_item').send_keys('Buy milk')
+        self.get_item_input_box().send_keys('Buy milk')
 
-        self.browser.find_element_by_id('id_new_item').send_keys(Keys.ENTER)
+        self.get_item_input_box().send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: Buy milk')
 
         # User submits another empty list item.
-        self.browser.find_element_by_id('id_new_item').send_keys(Keys.ENTER)
+        self.get_item_input_box().send_keys(Keys.ENTER)
 
         # An error message is shown again.
         self.wait_for(lambda: self.assertEqual(
@@ -32,8 +32,8 @@ class ItemValidationTest(FunctionalTest):
         ))
 
         # User enters some text and now it works.
-        self.browser.find_element_by_id('id_new_item').send_keys('Make tea')
+        self.get_item_input_box().send_keys('Make tea')
 
-        self.browser.find_element_by_id('id_new_item').send_keys(Keys.ENTER)
+        self.get_item_input_box().send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: Buy milk')
         self.wait_for_row_in_list_table('2: Make tea')

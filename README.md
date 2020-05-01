@@ -97,6 +97,8 @@ Coded in Python 3.6.x
 
 2. Provision Nginx and Gunicorn (on the server)
 
+    > Skip if not deploying for the first time
+
     Configure Nginx from template:
 
     ```bash
@@ -105,17 +107,12 @@ Coded in Python 3.6.x
     | sudo tee /etc/nginx/sites-available/<server domain>
     ```
 
-    Activate file with a symlink:
+    Activate file with a symlink and delete default:
 
     ```bash
     sudo ln -s /etc/nginx/sites-available/<server domain> /etc/nginx/sites-enabled/<server domain>
+    sudo rm /etc/nginx/sites-enabled/default
     ```
-
-    > If deploying for the first time: (skip thereafter)
-    >
-    > ```bash
-    > sudo rm /etc/nginx/sites-enabled/default
-    > ```
 
     Configure Systemd from template:
     
@@ -125,15 +122,21 @@ Coded in Python 3.6.x
     | sudo tee /etc/systemd/system/gunicorn-<server domain>.service
     ```
 
-    Start both services:
+3. Start the service (on the server)
 
-    > If deploying for the first time, replace `... reload nginx` with `... start nginx`
+    If deploying for the first time:
 
     ```bash
     sudo systemctl daemon-reload
-    sudo systemctl reload nginx
+    sudo systemctl start nginx
     sudo systemctl enable gunicorn-<server domain>
     sudo systemctl start gunicorn-<server domain>
+    ```
+
+    Otherwise:
+
+    ```bash
+    sudo systemctl restart gunicorn-<server domain>
     ```
 
 # Setting up geckodriver on macOS Catalina

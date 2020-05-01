@@ -14,6 +14,8 @@
 * Nginx 1.14.0
 * Gunicorn 20.0.x
 * Fabric3 1.14.post1
+* [Qunit](https://qunitjs.com/) 2.9.2
+* [jQuery](https://jquery.com/download/) 3.5.0
 
 Coded in Python 3.6.x
 
@@ -74,6 +76,12 @@ Coded in Python 3.6.x
 
     ```bash
     python manage.py test lists
+    ```
+
+2. For javascript test, enter the URL into the browser
+
+    ```
+    file://<path to project>/lists/static/tests/tests.html
     ```
 
 # Deploy

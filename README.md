@@ -28,6 +28,8 @@ Coded in Python 3.6.x
 1. Run the server
 
     ```bash
+    export EMAIL_ADDRESS='<your account>@gmail.com'
+    export EMAIL_PASSWORD='<your password>'
     python manage.py runserver
     ```
 
@@ -77,6 +79,8 @@ Coded in Python 3.6.x
     ```bash
     python manage.py test lists
     ```
+
+    > For testing user authentication, replace `lists` with `accounts`
 
 2. For javascript test, enter the URL into the browser
 

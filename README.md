@@ -50,6 +50,12 @@ Coded in Python 3.6.x
     sudo systemctl start gunicorn-<staging server domain>
     ```
 
+4. Optional: To enable log output on the console,
+
+    ```bash
+    sudo journalctl -f -u gunicorn-<staging server domain>
+    ```
+
 ### Functional test
 
 * Run all the tests locally:
@@ -66,7 +72,11 @@ Coded in Python 3.6.x
 
 * Run all the tests against staging server:
 
+    > export POP3 email address and password for `functional_tests.test_login`
+
     ```bash
+    export YAHOO_ADDRESS='<your account>@yahoo.com'
+    export YAHOO_PASSWORD='<generated app password>'
     STAGING_SERVER=<staging server domain> ./manage.py test functional_tests
     ```
 
@@ -102,6 +112,13 @@ Coded in Python 3.6.x
 2. Provision Nginx and Gunicorn (on the server)
 
     > Skip if not deploying for the first time
+
+    Configure gmail
+
+    ```bash
+    echo EMAIL_ADDRESS='<your account>@gmail.com' >> .env
+    echo EMAIL_PASSWORD='<your password>'
+    ```
 
     Configure Nginx from template:
 
@@ -140,6 +157,7 @@ Coded in Python 3.6.x
     Otherwise:
 
     ```bash
+    sudo systemctl daemon-reload
     sudo systemctl restart gunicorn-<server domain>
     ```
 

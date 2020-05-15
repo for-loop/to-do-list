@@ -73,10 +73,12 @@ Coded in Python 3.6.x
 * Run all the tests against staging server:
 
     > export POP3 email address and password for `functional_tests.test_login`
+    > export path to the local pem key for `functional_tests.test_my_lists` (if running on EC2)
 
     ```bash
     export YAHOO_ADDRESS='<your account>@yahoo.com'
     export YAHOO_PASSWORD='<generated app password>'
+    export PEM_PATH='<path to your local pem key>'
     STAGING_SERVER=<staging server domain> ./manage.py test functional_tests
     ```
 

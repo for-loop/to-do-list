@@ -107,6 +107,8 @@ Coded in Python 3.6.x
     > If the server runs on Amazon EC2, add a path to the SSH key.
 
     ```bash
+    export EMAIL_ADDRESS='<your account>@gmail.com'
+    export EMAIL_PASSWORD='<your password>'
     cd deploy_tools/
     fab deploy:host=<username>@<server domain> [-i /path/to/key.pem]
     ```
@@ -114,13 +116,6 @@ Coded in Python 3.6.x
 2. Provision Nginx and Gunicorn (on the server)
 
     > Skip if not deploying for the first time
-
-    Configure gmail
-
-    ```bash
-    echo EMAIL_ADDRESS='<your account>@gmail.com' >> .env
-    echo EMAIL_PASSWORD='<your password>'
-    ```
 
     Configure Nginx from template:
 

@@ -2,7 +2,9 @@ import os
 from fabric.api import run, env
 from fabric.context_managers import settings, shell_env
 
-env.key_filename=[os.environ['PEM_PATH']]
+def _get_ssh_key(host):
+    if host:
+        env.key_filename=[os.environ['PEM_PATH']]
 
 def _get_manage_dot_py(host):
     return f'~/sites/{host}/virtualenv/bin/python ~/sites/{host}/manage.py'
@@ -10,6 +12,7 @@ def _get_manage_dot_py(host):
 def reset_database(host):
     manage_dot_py = _get_manage_dot_py(host)
     with settings(host_string=f'ubuntu@{host}'):
+        _get_ssh_key(host)
         run(f'{manage_dot_py} flush --noinput')
 
 def _get_server_env_vars(host):
@@ -21,5 +24,6 @@ def create_session_on_server(host, email):
     with settings(host_string=f'ubuntu@{host}'):
         env_vars = _get_server_env_vars(host)
         with shell_env(**env_vars):
+            _get_ssh_key(host)
             session_key = run(f'{manage_dot_py} create_session {email}')
             return session_key.strip()

@@ -21,32 +21,20 @@ class NewVisitorTest(FunctionalTest):
         )
 
         # User types "Buy peacock feathers" into a text box
-        inputbox.send_keys('Buy peacock feathers')
-
         # When user hits <Enter>, the page updates and lists
         # "1: Buy peacock feathers"
-        inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
+        self.add_list_item('Buy peacock feathers')
 
         # The text box still allows the user to enter more items
         # User adds "Use peacock feathers to make a fly"
-        inputbox = self.get_item_input_box()
-        inputbox.send_keys('Use peacock feathers to make a fly')
-        inputbox.send_keys(Keys.ENTER)
-
-        # The page updates and lists both items
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
-        self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
+        self.add_list_item('Use peacock feathers to make a fly')
 
         # User is done with the site
 
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # User 1 starts a new to-do list
         self.browser.get(self.live_server_url)
-        inputbox = self.get_item_input_box()
-        inputbox.send_keys('Buy peacock feathers')
-        inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
+        self.add_list_item('Buy peacock feathers')
 
         # The site has generated a unique URL for user 1
         user_1_list_url = self.browser.current_url
@@ -66,10 +54,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertNotIn('make a fly', page_text)
 
         # User 2 starts a new list by entering a new item
-        inputbox = self.get_item_input_box()
-        inputbox.send_keys('Buy milk')
-        inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy milk')
+        self.add_list_item('Buy milk')
 
         # User 2 gets a unique URL
         user_2_list_url = self.browser.current_url

@@ -3,11 +3,13 @@
 2. [Run](README.md#run)
 3. [Deploy](README.md#deploy)
 4. [Setting up geckodriver on macOS Catalina](README.md#setting-up-geckodriver-on-macos-catalina)
+5. [Setting up Jenkins on EC2 Ubuntu 18.04](README.md#setting-up-jenkins-on-ec2-ubuntu)
 
 # Dependencies
 
 * Firefox (used 75.0+)
 * geckodriver (used 0.26.0)
+    > If setting up geckodriver 0.26.0 on macOS 10.15 (Catalina), [here is a step-by-step instruction](README.md#setting-up-geckodriver-on-macos-catalina).
 * Django 1.11.x
 * Selenium 3.x
 * [Bootstrap](https://getbootstrap.com/) 4.4.x
@@ -16,10 +18,10 @@
 * Fabric3 1.14.post1
 * [Qunit](https://qunitjs.com/) 2.9.2
 * [jQuery](https://jquery.com/download/) 3.5.0
+* Jenkins
+    > When setting up on EC2 Ubuntu 18.04, you may need to install [additional dependencies](README.md#setting-up-jenkins-on-ec2-ubuntu)
 
 Coded in Python 3.6.x
-
-> If setting up geckodriver 0.26.0 on macOS 10.15 (Catalina), [here is a step-by-step instruction](README.md#setting-up-geckodriver-on-macos-catalina).
 
 # Run
 
@@ -187,6 +189,40 @@ This instruction is for users of geckodriver 0.26.0 on macOS 10.15 Catalina, whi
 
     ```bash
     rm geckodriver-v0.26.0-macos.tar.gz
+    ```
+
+# Setting up Jenkins on EC2 Ubuntu
+
+This instruction is for users who are setting up CI server on EC2 Ubuntu 18.04.
+
+As of 2020-05-18, a few additional steps (not mentioned in the book) was necessary:
+
+1. Launch a new EC2 instance
+2. Update and upgrade
+
+    ```bash
+    sudo apt-get update & sudo apt-get upgrade -y
+    ```
+
+3. Check if Java Runtime Environment (JRE) exists or not:
+
+    ```bash
+    java -version
+    ```
+
+    > If not, install one
+    > ```bash
+    > sudo apt install openjdk-8-jre
+    > ```
+
+4. Install Jenkins by following the [updated instruction](https://www.jenkins.io/doc/book/installing/#long-term-support-release)
+
+5. Install other dependencies by following the [instruction in the book](https://www.obeythetestinggoat.com/book/chapter_CI.html)
+
+6. Before building for the first time, install `python3-distutils`:
+
+    ```bash
+    sudo apt-get install python3-distutils
     ```
 
 ---

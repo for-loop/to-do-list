@@ -6,3 +6,4 @@ __pycache__
 virtualenv
 .env
 functional_tests/screendumps
+*.DS_Store
